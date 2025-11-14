@@ -1,0 +1,64 @@
+{
+    "dashboard": {
+        "title": "Crypto Top 5 Performers",
+        "timezone": "browser",
+        "refresh": "5s",
+        "panels": [
+            {
+                "id": 1,
+                "title": "Top 5 Cryptocurrencies by 24h % Gain",
+                "type": "table",
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 0,
+                    "y": 0
+                },
+                "targets": [
+                    {
+                        "rawQuery": true,
+                        "query": "SELECT symbol, price_change_percent, high_price, low_price, volume FROM latest_ticker_summary ORDER BY price_change_percent DESC LIMIT 5"
+                    }
+                ],
+                "transformations": [
+                    {
+                        "id": "organize",
+                        "options": {
+                            "renameByName": {
+                                "symbol": "Symbol",
+                                "price_change_percent": "24h Change %",
+                                "high_price": "High",
+                                "low_price": "Low",
+                                "volume": "Volume"
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "title": "Top 5 % Change (Bar Chart)",
+                "type": "barchart",
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 12,
+                    "y": 0
+                },
+                "targets": [
+                    {
+                        "rawQuery": true,
+                        "query": "SELECT symbol, price_change_percent FROM latest_ticker_summary ORDER BY price_change_percent DESC LIMIT 5"
+                    }
+                ],
+                "fieldConfig": {
+                    "defaults": {
+                        "color": {
+                            "mode": "palette-classic"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

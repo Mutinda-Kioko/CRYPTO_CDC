@@ -1,0 +1,61 @@
+{
+    "dashboard": {
+        "title": "Crypto Price Trends",
+        "timezone": "browser",
+        "refresh": "10s",
+        "panels": [
+            {
+                "id": 1,
+                "title": "BTC Price Trend (Last Hour)",
+                "type": "timeseries",
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 0,
+                    "y": 0
+                },
+                "targets": [
+                    {
+                        "rawQuery": true,
+                        "query": "SELECT timestamp, price FROM latest_prices WHERE symbol = 'BTCUSDT' AND timestamp > toTimestamp(now()) - 3600000"
+                    }
+                ],
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {
+                            "drawStyle": "line",
+                            "lineWidth": 2,
+                            "fillOpacity": 10
+                        }
+                    }
+                }
+            },
+            {
+                "id": 2,
+                "title": "ETH Price Trend (Last Hour)",
+                "type": "timeseries",
+                "gridPos": {
+                    "h": 8,
+                    "w": 12,
+                    "x": 12,
+                    "y": 0
+                },
+                "targets": [
+                    {
+                        "rawQuery": true,
+                        "query": "SELECT timestamp, price FROM latest_prices WHERE symbol = 'ETHUSDT' AND timestamp > toTimestamp(now()) - 3600000"
+                    }
+                ],
+                "fieldConfig": {
+                    "defaults": {
+                        "custom": {
+                            "drawStyle": "line",
+                            "lineWidth": 2,
+                            "fillOpacity": 10
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}
